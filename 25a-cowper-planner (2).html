@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lola & Horatio — 25A Cowper Street</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --cream:#fdfaf6; --white:#fff;
+  --rose:#c96b8a; --rose-mid:#e4a0b8; --rose-bg:#fdf0f5; --rose-hover:#b05578;
+  --sage:#7aaa7e; --sale:#d44040; --warn:#7c5c00; --warn-bg:#fef8e0;
+  --ink:#2a1a14; --ink2:#7a6259; --ink3:#c0a89e;
+  --border:rgba(201,107,138,.15); --border-hard:rgba(201,107,138,.32);
+  --sh:0 2px 8px rgba(201,107,138,.07),0 8px 32px rgba(0,0,0,.05);
+  --sh-h:0 6px 22px rgba(201,107,138,.16),0 16px 48px rgba(0,0,0,.08);
+  --sh-s:0 0 0 2.5px var(--rose),0 6px 24px rgba(201,107,138,.22);
+  --r:18px; --rlg:24px;
+  --cat-seating-bg:#fce8ed;  --cat-seating-ink:#9b3a56;
+  --cat-storage-bg:#dff0e0;  --cat-storage-ink:#2a5e30;
+  --cat-bedroom-bg:#ece4f5;  --cat-bedroom-ink:#5e3a82;
+  --cat-kitchen-bg:#fdecd6;  --cat-kitchen-ink:#8a4a18;
+  --cat-hallway-bg:#daeaf8;  --cat-hallway-ink:#1a3e72;
+  --cat-lighting-bg:#fdf4d0; --cat-lighting-ink:#7a5400;
+  --cat-mirrors-bg:#e4e4ee;  --cat-mirrors-ink:#3a3a5a;
+}
+body{font-family:'Nunito',sans-serif;font-size:14px;line-height:1.6;background:var(--cream);color:var(--ink);min-height:100vh}
+button{font-family:'Nunito',sans-serif;cursor:pointer}
+input,textarea,select{font-family:'Nunito',sans-serif;font-size:13px}
+a{color:var(--rose);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* HEADER */
+.site-header{position:sticky;top:0;z-index:200;background:var(--white);border-bottom:1px solid var(--border);box-shadow:0 2px 16px rgba(201,107,138,.08)}
+.header-topstrip{height:4px;background:linear-gradient(90deg,#e8b4c8,#c96b8a,#f0c4a0,#b8d8b8,#c4a8e0)}
+.header-inner{max-width:1160px;margin:0 auto;padding:13px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.header-brand{flex:1;min-width:160px}
+.header-brand h1{font-family:'Fraunces',serif;font-style:italic;font-size:21px;font-weight:500;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+.header-brand p{font-size:11px;color:var(--ink3);margin-top:2px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.header-stats{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.hstat{padding:7px 16px;text-align:center;background:var(--rose-bg);border-radius:50px;border:1px solid var(--border)}
+.hstat-l{font-size:10px;letter-spacing:.07em;color:var(--ink3);font-weight:700;text-transform:uppercase}
+.hstat-v{font-size:17px;font-weight:600;letter-spacing:-.02em;font-family:'Fraunces',serif}
+.hstat-v.ac{color:var(--rose)}
+.header-btns{display:flex;gap:8px;align-items:center}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--border-hard);flex-shrink:0;transition:background .3s}
+.sync-dot.ok{background:#5bbf7a}
+.sync-dot.busy{background:#f0a050;animation:pulse .8s ease-in-out infinite}
+.sync-dot.err{background:#d44}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.btn{font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;padding:7px 16px;border-radius:50px;border:1.5px solid var(--border-hard);background:var(--white);color:var(--ink2);transition:all .15s;letter-spacing:.01em}
+.btn:hover{background:var(--rose-bg);border-color:var(--rose-mid);color:var(--rose)}
+.btn.primary{background:var(--rose);color:#fff;border-color:var(--rose)}
+.btn.primary:hover{background:var(--rose-hover);border-color:var(--rose-hover)}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--ink3)}
+.btn.ghost:hover{color:var(--ink2);background:var(--rose-bg)}
+.btn.danger{color:#d44;border-color:rgba(221,68,68,.25)}
+.btn.danger:hover{background:#fef5f5}
+
+/* PROGRESS */
+.progress-wrap{max-width:1160px;margin:24px auto 0;padding:0 28px}
+.progress-card{background:var(--white);border-radius:var(--rlg);padding:16px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;box-shadow:var(--sh);border:1px solid var(--border)}
+.progress-label{font-size:12px;color:var(--ink2);white-space:nowrap;font-weight:700}
+.progress-track{flex:1;min-width:80px;height:8px;background:var(--rose-bg);border-radius:50px;overflow:hidden}
+.progress-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--rose-mid),var(--rose));transition:width .4s ease}
+.progress-pct{font-size:12px;font-weight:800;color:var(--ink);white-space:nowrap}
+main{max-width:1160px;margin:24px auto 0;padding:0 28px 80px}
+
+/* SECTIONS */
+.room-section{margin-bottom:32px}
+.room-title{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:6px 0;margin-bottom:14px;user-select:none}
+.room-title-text{display:flex;align-items:center;gap:10px}
+.room-title-name{font-family:'Fraunces',serif;font-style:italic;font-size:21px;font-weight:400;color:var(--ink);letter-spacing:-.01em}
+.room-sel-badge{font-size:11px;font-weight:800;background:var(--rose-bg);color:var(--rose);padding:3px 12px;border-radius:50px;border:1px solid var(--border)}
+.room-chevron{width:26px;height:26px;border-radius:50%;background:var(--rose-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--rose);transition:transform .22s;flex-shrink:0}
+.room-section.collapsed .room-chevron{transform:rotate(-90deg)}
+.room-section.collapsed .room-body{display:none}
+
+/* SLOTS */
+.slot{background:var(--white);border-radius:var(--rlg);margin-bottom:14px;overflow:hidden;box-shadow:var(--sh);border:1px solid var(--border)}
+.slot-head{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;cursor:pointer;user-select:none;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,var(--white) 60%,var(--rose-bg))}
+.slot-head-left{display:flex;align-items:center;gap:10px}
+.slot-label{font-size:13px;font-weight:800;color:var(--ink)}
+.slot-n{font-size:11px;color:var(--rose);font-weight:700;background:var(--rose-bg);padding:2px 9px;border-radius:50px;border:1px solid var(--border)}
+.slot-chevron{font-size:9px;color:var(--rose);transition:transform .2s;flex-shrink:0}
+.slot.collapsed .slot-chevron{transform:rotate(-90deg)}
+.slot.collapsed .slot-body{display:none}
+.slot-head-right{display:flex;align-items:center;gap:10px}
+.slot-summary-txt{font-size:12px;color:var(--ink3);font-weight:600}
+.slot-summary-price{font-size:14px;font-weight:600;color:var(--rose);font-family:'Fraunces',serif}
+
+/* CARDS */
+.slot-cards{display:flex;gap:14px;padding:16px 18px;overflow-x:auto;align-items:flex-start;scrollbar-width:thin;scrollbar-color:var(--border-hard) transparent}
+.slot-cards::-webkit-scrollbar{height:4px}
+.slot-cards::-webkit-scrollbar-thumb{background:var(--border-hard);border-radius:2px}
+.pcard{flex:0 0 176px;display:flex;flex-direction:column;border-radius:var(--r);cursor:pointer;position:relative;background:var(--white);box-shadow:var(--sh);border:2px solid transparent;transition:box-shadow .2s,transform .15s,border-color .15s;overflow:hidden}
+.pcard:hover{box-shadow:var(--sh-h);transform:translateY(-3px)}
+.pcard.selected{border-color:var(--rose);box-shadow:var(--sh-s)}
+
+/* selected accent strip */
+.pcard::before{content:'';display:block;height:3px;background:transparent;flex-shrink:0;transition:background .15s}
+.pcard.selected::before{background:var(--rose)}
+
+/* CARD BODY */
+.pcard-body{padding:11px 13px;flex:1;display:flex;flex-direction:column;gap:3px}
+.pcard-name{font-size:12px;font-weight:800;letter-spacing:.01em}
+.pcard-desc{font-size:11px;color:var(--ink2);line-height:1.4;flex:1}
+.pcard-price-row{display:flex;align-items:baseline;gap:6px;margin-top:8px;flex-wrap:wrap}
+.pcard-price{font-family:'Fraunces',serif;font-size:22px;font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.pcard-price.sale{color:var(--sale)}
+.pcard-was{font-size:11px;color:var(--ink3);text-decoration:line-through}
+.pcard-sale-tag{font-size:9px;font-weight:800;background:#fde8e8;color:var(--sale);padding:2px 7px;border-radius:50px;letter-spacing:.04em}
+.pcard-meta{font-size:10px;color:var(--ink3);line-height:1.7;margin-top:4px;font-weight:600}
+.pcard-note{font-size:10px;color:var(--warn);background:var(--warn-bg);border-radius:10px;padding:5px 9px;margin-top:6px;line-height:1.5}
+.pcard-loading{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink3);margin-top:6px}
+.spinner{width:12px;height:12px;border:2px solid var(--border-hard);border-top-color:var(--rose);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* CARD FOOTER */
+.pcard-foot{padding:8px 13px;border-top:1px solid var(--border);background:rgba(253,240,245,.5);display:flex;align-items:center;justify-content:space-between;gap:6px}
+.retailer-pill{font-size:10px;font-weight:800;padding:2px 9px;border-radius:50px;letter-spacing:.04em;flex-shrink:0}
+.rp-IKEA{background:#003399;color:#FFDD00}
+.rp-JL{background:#2c5234;color:#fff}
+.rp-OTHER,.rp-{background:var(--rose-bg);color:var(--rose);border:1px solid var(--border)}
+.pcard-actions{display:flex;align-items:center;gap:6px}
+.view-link{font-size:10px;font-weight:700;color:var(--rose);padding:3px 9px;border-radius:50px;background:var(--rose-bg);border:1px solid var(--border);transition:background .12s;white-space:nowrap}
+.view-link:hover{background:var(--border-hard);text-decoration:none}
+
+/* QTY */
+.qty-stepper{display:flex;align-items:center;gap:5px}
+.qty-btn{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border-hard);background:var(--white);font-size:15px;font-weight:700;color:var(--rose);display:flex;align-items:center;justify-content:center;line-height:1;transition:all .12s}
+.qty-btn:hover{background:var(--rose);color:#fff;border-color:var(--rose)}
+.qty-num{font-size:13px;font-weight:800;min-width:18px;text-align:center;color:var(--rose);font-family:'Fraunces',serif}
+
+/* CUSTOM FORM */
+.add-custom-trigger{flex:0 0 auto;min-height:168px;width:136px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;border:2px dashed var(--border-hard);border-radius:var(--r);color:var(--ink3);font-size:12px;font-weight:700;cursor:pointer;background:transparent;transition:all .18s;font-family:'Nunito',sans-serif}
+.add-custom-trigger:hover{border-color:var(--rose);color:var(--rose);background:var(--rose-bg)}
+.add-custom-trigger .plus{font-size:22px;font-weight:300;line-height:1;width:40px;height:40px;border-radius:50%;border:2px dashed currentColor;display:flex;align-items:center;justify-content:center}
+.custom-form-wrap{flex:0 0 300px;border:2px solid var(--rose);border-radius:var(--r);background:var(--white);padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--sh-h)}
+.custom-form-title{font-size:13px;font-weight:800;color:var(--rose)}
+.form-url-row{display:flex;gap:6px}
+.form-input{width:100%;padding:8px 12px;border:1.5px solid var(--border-hard);border-radius:10px;font-size:12px;color:var(--ink);background:var(--white);transition:border-color .15s}
+.form-input:focus{outline:none;border-color:var(--rose)}
+.form-input::placeholder{color:var(--ink3)}
+.form-row{display:grid;grid-template-columns:1fr auto;gap:6px}
+.form-row-3{display:grid;grid-template-columns:1fr 80px 80px;gap:6px}
+.form-label{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);font-weight:700;margin-bottom:2px}
+.form-group{display:flex;flex-direction:column}
+.form-actions{display:flex;justify-content:space-between;gap:8px;padding-top:4px}
+.fetch-spinner{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--ink3)}
+
+/* SUMMARY */
+.summary-section{background:var(--white);border-radius:var(--rlg);padding:26px 28px;margin-top:32px;box-shadow:var(--sh);border:1px solid var(--border)}
+.summary-title{font-family:'Fraunces',serif;font-style:italic;font-size:22px;font-weight:400;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border);color:var(--ink)}
+.summary-empty{font-size:13px;color:var(--ink3);font-style:italic}
+.summary-table{width:100%;border-collapse:collapse;font-size:13px}
+.summary-table th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink3);font-weight:700;padding:6px 0;border-bottom:1px solid var(--border)}
+.summary-table td{padding:9px 0;border-bottom:1px solid var(--border);vertical-align:top}
+.summary-table tr:last-child td{border-bottom:none}
+.summary-room{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--rose);font-weight:700}
+.summary-item-name{font-weight:700}
+.summary-item-detail{font-size:11px;color:var(--ink2)}
+.summary-price{font-weight:600;text-align:right;white-space:nowrap;font-family:'Fraunces',serif;font-size:15px}
+.summary-total td{font-size:16px;font-weight:700;padding-top:14px;border-top:2px solid var(--rose);border-bottom:none;font-family:'Fraunces',serif}
+.site-footer{text-align:center;padding:28px;font-size:11px;color:var(--ink3);border-top:1px solid var(--border);margin-top:40px;line-height:2;font-weight:600}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:13px;font-weight:700;padding:11px 24px;border-radius:50px;opacity:0;transition:opacity .2s;z-index:999;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.toast.show{opacity:1}
+@media(max-width:680px){
+  .header-inner{flex-direction:column;align-items:flex-start;gap:12px}
+  main,.progress-wrap{padding-left:16px;padding-right:16px}
+  .pcard{flex:0 0 160px}
+  .custom-form-wrap{flex:0 0 268px}
+  .hstat{padding:7px 12px}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-topstrip"></div>
+  <div class="header-inner">
+    <div class="header-brand">
+      <h1>Lola &amp; Horatio</h1>
+      <p>25A Cowper Street &nbsp;·&nbsp; Flat setup</p>
+    </div>
+    <div class="header-stats">
+      <div class="hstat"><div class="hstat-l">Basket</div><div class="hstat-v ac" id="val-basket">£0</div></div>
+      <div class="hstat"><div class="hstat-l">Items</div><div class="hstat-v" id="val-items">0</div></div>
+      <div class="hstat"><div class="hstat-l">Decided</div><div class="hstat-v" id="val-decided">0/0</div></div>
+    </div>
+    <div class="header-btns">
+      <div class="sync-dot" id="sync-dot" title="Not connected to Google Sheets"></div>
+      <button class="btn" onclick="shareURL()">Share ↗</button>
+      <button class="btn danger" onclick="resetAll()">Clear</button>
+    </div>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-card">
+    <span class="progress-label">Decisions made</span>
+    <div class="progress-track"><div class="progress-fill" id="prog-bar" style="width:0%"></div></div>
+    <span class="progress-pct" id="prog-pct">0 of 0 slots decided</span>
+  </div>
+</div>
+
+<main>
+  <div id="app"></div>
+  <div id="summary-mount"></div>
+</main>
+
+<div class="site-footer">
+  Lola &amp; Horatio &nbsp;·&nbsp; 25A Cowper Street &nbsp;·&nbsp;
+  Prices from in-store tags, April 2026 &nbsp;·&nbsp;
+  Add items via the + button in any slot &nbsp;·&nbsp;
+  <a href="https://www.ikea.co.uk/buyback" target="_blank">IKEA Buyback</a> when you're done
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══════ CONFIGURATION ══════ */
+const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyFwjfEom-8LAr5MnDD9mF3FPL_4C2bBwXFtkTiEkRzQ9zYZ1pLU7cVQBc6bFd8kJNB/exec';  // Paste your Apps Script web app URL
+const ANTHROPIC_KEY  = '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';  // Paste your Anthropic API key (sk-ant-...)
+/* ═══════════════════════════ */
+
+/* ══════ DATA ══════ */
+const sections = [
+  {
+    id:'living-room', title:'Living room', cat:'seating',
+    slots:[
+      { id:'armchair', label:'Armchair', options:[
+        { id:'ekenaset', name:'EKENÄSET', desc:'Armchair — Kilanda light beige cover, zigzag springs, high-resilience foam',
+          price:179, was:null, retailer:'IKEA', article:'505.334.92', loc:'Aisle 11 / Loc 27',
+          url:'https://www.ikea.com/gb/en/p/ekenaset-armchair-kilanda-light-beige-50533492/', img:null, note:null }
+      ]}
+    ]
+  },
+  {
+    id:'storage', title:'Storage & wardrobes', cat:'storage',
+    slots:[
+      { id:'wardrobe', label:'Main wardrobe', options:[
+        { id:'nordkisa', name:'NORDKISA', desc:'120×186 cm bamboo — sliding door, doubles as room divider',
+          price:279, was:null, retailer:'IKEA', article:'004.394.68', loc:'Aisle 20 / Loc 40',
+          url:'https://www.ikea.com/gb/en/p/nordkisa-open-wardrobe-with-sliding-door-bamboo-00439468/', img:null, note:null },
+        { id:'pax-open', name:'PAX / OPEN', desc:'75×35×236 cm white — frames & interior fittings included',
+          price:185, was:null, retailer:'IKEA', article:'(combo)', loc:'—',
+          url:'https://www.ikea.com/gb/en/p/pax-open-wardrobe-combination-s99315481/', img:null,
+          note:'Needs wall-fixing — check tenancy agreement before buying.' },
+        { id:'kronoren', name:'KRONÖREN', desc:'90×49×181 cm pine — open rail wardrobe, no concealed storage',
+          price:45, was:null, retailer:'IKEA', article:'406.108.05', loc:'Aisle 22 / Loc 10',
+          url:'https://www.ikea.com/gb/en/p/kronoren-open-wardrobe-pine-40610805/', img:null, note:null }
+      ]},
+      { id:'trolley', label:'Kitchen trolley', options:[
+        { id:'raskog-black', name:'RÅSKOG', desc:'35×45×77 cm — black, lockable castors',
+          price:29, was:35, retailer:'IKEA', article:'405.821.81', loc:'Aisle 15 / Loc 0',
+          url:'https://www.ikea.com/gb/en/p/raskog-trolley-black-40582181/', img:null, note:'Currently on sale — was £35.' },
+        { id:'raskog-pink', name:'RÅSKOG', desc:'35×45×77 cm — pink',
+          price:29, was:null, retailer:'IKEA', article:'706.297.14', loc:'Aisle 15 / Loc 6',
+          url:'https://www.ikea.com/gb/en/p/raskog-trolley-pink-70629714/', img:null, note:null },
+        { id:'raskog-gg', name:'RÅSKOG', desc:'35×45×77 cm — grey-green',
+          price:29, was:null, retailer:'IKEA', article:'205.916.62', loc:'Aisle 15 / Loc 0',
+          url:'https://www.ikea.com/gb/en/p/raskog-trolley-grey-green-20591662/', img:null, note:null },
+        { id:'raskog-by', name:'RÅSKOG', desc:'35×45×77 cm — beige-yellow',
+          price:29, was:null, retailer:'IKEA', article:'005.916.63', loc:'Aisle 15 / Loc 5',
+          url:'https://www.ikea.com/gb/en/p/raskog-trolley-beige-yellow-00591663/', img:null, note:null },
+        { id:'raskog-sw', name:'RÅSKOG (small)', desc:'28×38×61 cm white — fits under most tables/desks',
+          price:19, was:null, retailer:'IKEA', article:'005.867.89', loc:'Aisle 15 / Loc 1',
+          url:'https://www.ikea.com/gb/en/p/raskog-trolley-white-00586789/', img:null, note:null }
+      ]}
+    ]
+  },
+  {
+    id:'bedroom', title:'Bedroom', cat:'bedroom',
+    slots:[
+      { id:'bedside', label:'Bedside table', options:[
+        { id:'hemnes', name:'HEMNES', desc:'46×35 cm — grey-green / light brown stained, solid wood drawer',
+          price:55, was:null, retailer:'IKEA', article:'506.107.39', loc:'Aisle 20 / Loc 5',
+          url:'https://www.ikea.com/gb/en/p/hemnes-bedside-table-grey-green-light-brown-stained-50610739/', img:null, note:null },
+        { id:'blankhallan', name:'BLANKHÄLLAN', desc:'Green/turquoise — round top, colour-matched interior drawer',
+          price:45, was:null, retailer:'IKEA', article:'706.209.97', loc:'Aisle 20 / Loc 9',
+          url:'https://www.ikea.com/gb/en/p/blankhallan-bedside-table-green-turquoise-70620997/', img:null, note:null }
+      ]},
+      { id:'pillow', label:'Pillow', options:[
+        { id:'pilspinnare', name:'PILSPINNARE', desc:'50×80 cm high — feathers & duck down, washable at 60°C',
+          price:25, was:null, retailer:'IKEA', article:'—', loc:'—',
+          url:'https://www.ikea.com/gb/en/search/?q=pilspinnare', img:null,
+          note:'Multiply quantity — one per person.' }
+      ]},
+      { id:'pillowcase', label:'Pillowcase', options:[
+        { id:'angs-white', name:'ÄNGSLILJA', desc:'50×80 cm white — pre-washed cotton, envelope closure',
+          price:5, was:null, retailer:'IKEA', article:'—', loc:'—',
+          url:'https://www.ikea.com/gb/en/search/?q=angslilja+pillowcase+white', img:null, note:null },
+        { id:'angs-natural', name:'ÄNGSLILJA', desc:'50×80 cm natural/ecru — pre-washed cotton, envelope closure',
+          price:5, was:null, retailer:'IKEA', article:'—', loc:'—',
+          url:'https://www.ikea.com/gb/en/search/?q=angslilja+pillowcase+natural', img:null, note:null }
+      ]}
+    ]
+  },
+  {
+    id:'kitchen', title:'Kitchen & dining', cat:'kitchen',
+    slots:[
+      { id:'cutlery', label:'Cutlery set', options:[
+        { id:'doftskold-24', name:'DOFTSKÖLD', desc:'24-piece — 6× knife, fork, spoon, teaspoon. Stainless steel.',
+          price:20, was:null, retailer:'IKEA', article:'—', loc:'—',
+          url:'https://www.ikea.com/gb/en/search/?q=doftskold+24+cutlery', img:null,
+          note:'Price not on tag — est. £15–20. Confirm in store.' }
+      ]},
+      { id:'glasses', label:'Drinking glasses', options:[
+        { id:'guldmolly', name:'GULDMOLLY', desc:'26 cl clear — lightweight all-rounder. Price per glass.',
+          price:1, was:null, retailer:'IKEA', article:'—', loc:'—',
+          url:'https://www.ikea.com/gb/en/search/?q=guldmolly+glass', img:null, note:null },
+        { id:'tjarlek', name:'TJÄRLEK', desc:'30 cl mixed colours — 4-pack, champagne/cocktail flute style',
+          price:19, was:null, retailer:'IKEA', article:'—', loc:'—',
+          url:'https://www.ikea.com/gb/en/search/?q=tjarlek+glass', img:null, note:null }
+      ]},
+      { id:'bowls', label:'Bowls', options:[
+        { id:'fark-bowl-blue', name:'FÄRGKLAR', desc:'Bowl 16 cm — light blue ceramic',
+          price:2, was:null, retailer:'IKEA', article:'—', loc:'—',
+          url:'https://www.ikea.com/gb/en/search/?q=fargklar+bowl+light+blue', img:null, note:null },
+        { id:'fark-bowl-lilac', name:'FÄRGKLAR', desc:'Bowl 16 cm — lilac ceramic',
+          price:2, was:null, retailer:'IKEA', article:'—', loc:'—',
+          url:'https://www.ikea.com/gb/en/search/?q=fargklar+bowl+lilac', img:null, note:null }
+      ]},
+      { id:'plate', label:'Side plate', options:[
+        { id:'fark-plate-blue', name:'FÄRGKLAR', desc:'Side plate 20 cm — light blue ceramic',
+          price:2, was:null, retailer:'IKEA', article:'—', loc:'—',
+          url:'https://www.ikea.com/gb/en/search/?q=fargklar+side+plate+light+blue', img:null, note:null }
+      ]},
+      { id:'oven-dish', label:'Oven dish', options:[
+        { id:'gladelig', name:'GLADELIG', desc:'Oven dish set of 2 — blue stoneware',
+          price:29, was:null, retailer:'IKEA', article:'506.007.21', loc:'—',
+          url:'https://www.ikea.com/gb/en/p/gladelig-oven-dish-set-of-2-blue-50600721/', img:null, note:null }
+      ]}
+    ]
+  },
+  {
+    id:'hallway', title:'Hallway', cat:'hallway',
+    slots:[
+      { id:'coat-stand', label:'Coat & hat stand', options:[
+        { id:'ekrar-red', name:'EKRAR', desc:'169 cm bright red — lower hooks for bags & coats',
+          price:19, was:null, retailer:'IKEA', article:'306.002.89', loc:'Aisle 23 / Loc 59',
+          url:'https://www.ikea.com/gb/en/p/ekrar-hat-and-coat-stand-bright-red-30600289/', img:null, note:null }
+      ]},
+      { id:'doormat', label:'Door mat', options:[
+        { id:'stavreby', name:'STAVREBY', desc:'40×60 cm — handmade braided natural coir, unique each piece',
+          price:12, was:null, retailer:'IKEA', article:'—', loc:'—',
+          url:'https://www.ikea.com/gb/en/search/?q=stavreby+door+mat', img:null, note:null },
+        { id:'vagtyp-cat', name:'VÄGTYP', desc:'40×60 cm — cat design, black & natural coir',
+          price:8, was:null, retailer:'IKEA', article:'—', loc:'—',
+          url:'https://www.ikea.com/gb/en/search/?q=vagtyp+door+mat', img:null, note:null },
+        { id:'arbetstag-dog', name:'ARBETSTÅG', desc:'40×60 cm — dog design, natural & black coir',
+          price:8, was:null, retailer:'IKEA', article:'—', loc:'—',
+          url:'https://www.ikea.com/gb/en/search/?q=arbetstag+door+mat', img:null, note:null }
+      ]}
+    ]
+  },
+  {
+    id:'lighting', title:'Lighting', cat:'lighting',
+    slots:[
+      { id:'floor-lamp', label:'Floor lamp', options:[
+        { id:'rodflik-gg', name:'RÖDFLIK', desc:'Floor/reading lamp — grey-green, adjustable head. Also in light beige.',
+          price:29, was:null, retailer:'IKEA', article:'—', loc:'—',
+          url:'https://www.ikea.com/gb/en/search/?q=rodflik+lamp', img:null, note:null }
+      ]}
+    ]
+  },
+  {
+    id:'mirrors', title:'Mirrors', cat:'mirrors',
+    slots:[
+      { id:'mirror-large', label:'Large / statement mirror', options:[
+        { id:'lindbyn-60x120', name:'LINDBYN', desc:'60×120 cm black arch — bathroom approved, hang either way',
+          price:60, was:null, retailer:'IKEA', article:'—', loc:'Glass House B3',
+          url:'https://www.ikea.com/gb/en/search/?q=lindbyn+mirror+60x120', img:null,
+          note:'Needs wall fixing — check tenancy agreement.' },
+        { id:'ikornnes', name:'IKORNNES', desc:'52×167 cm ash — freestanding full-length, no wall fixing needed',
+          price:99, was:null, retailer:'IKEA', article:'302.983.96', loc:'Aisle 25 / Loc 20',
+          url:'https://www.ikea.com/gb/en/p/ikornnes-standing-mirror-ash-30298396/', img:null,
+          note:'Ideal for a tenancy — no wall fixing needed.' }
+      ]},
+      { id:'mirror-medium', label:'Smaller mirror', options:[
+        { id:'lindbyn-40x130', name:'LINDBYN', desc:'40×130 cm black — tall & narrow',
+          price:45, was:null, retailer:'IKEA', article:'—', loc:'Glass House A2',
+          url:'https://www.ikea.com/gb/en/search/?q=lindbyn+mirror+40x130', img:null, note:'Needs wall fixing.' },
+        { id:'nissedal', name:'NISSEDAL', desc:'40×150 cm white — can be made turnable with included hinges',
+          price:29, was:null, retailer:'IKEA', article:'—', loc:'Glass House A3',
+          url:'https://www.ikea.com/gb/en/search/?q=nissedal+mirror', img:null, note:'Needs wall fixing.' },
+        { id:'lommaryd', name:'LOMMARYD', desc:'66×80 cm — frameless, wider landscape format',
+          price:40, was:60, retailer:'IKEA', article:'—', loc:'Glass House A2',
+          url:'https://www.ikea.com/gb/en/search/?q=lommaryd+mirror', img:null,
+          note:'Was £60 — marked down to £40 on tag. Needs wall fixing.' }
+      ]}
+    ]
+  }
+];
+
+/* ══════ STATE ══════ */
+const state = { selections:{}, customItems:{}, collapsed:{sections:{},slots:{}} };
+let openFormSlot = null;
+
+function loadLocalState() {
+  try {
+    const r=localStorage.getItem('cowper-v3');
+    if(r){const s=JSON.parse(r);Object.assign(state.selections,s.selections||{});Object.assign(state.customItems,s.customItems||{});}
+    const c=localStorage.getItem('cowper-collapsed');
+    if(c) Object.assign(state.collapsed,JSON.parse(c));
+  } catch(e){}
+}
+function saveLocal() {
+  try{
+    localStorage.setItem('cowper-v3',JSON.stringify({selections:state.selections,customItems:state.customItems}));
+    localStorage.setItem('cowper-collapsed',JSON.stringify(state.collapsed));
+  }catch(e){}
+}
+
+/* ══════ SHEETS SYNC ══════ */
+let syncTimer=null;
+function setSyncStatus(s){
+  const d=document.getElementById('sync-dot');if(!d)return;
+  d.className='sync-dot'+(s!=='off'?' '+s:'');
+  d.title={ok:'Synced with Google Sheets',busy:'Syncing…',err:'Sync error',off:'Not connected'}[s]||'';
+}
+async function sheetGet(){
+  if(!SHEET_ENDPOINT)return null;
+  setSyncStatus('busy');
+  try{const r=await fetch(SHEET_ENDPOINT+'?action=getAll',{cache:'no-store'});const d=await r.json();setSyncStatus('ok');return d;}
+  catch(e){setSyncStatus('err');return null;}
+}
+async function sheetPost(body){
+  if(!SHEET_ENDPOINT)return;setSyncStatus('busy');
+  try{await fetch(SHEET_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});setSyncStatus('ok');}
+  catch(e){setSyncStatus('err');}
+}
+function scheduleSyncSelections(){
+  clearTimeout(syncTimer);
+  syncTimer=setTimeout(()=>sheetPost({action:'saveSelections',selections:state.selections}),800);
+}
+async function initFromSheet(){
+  if(!SHEET_ENDPOINT){setSyncStatus('off');return;}
+  const data=await sheetGet();if(!data)return;
+  if(data.selections){
+    data.selections.forEach(r=>{
+      if(!state.selections[r.SlotID])state.selections[r.SlotID]={};
+      state.selections[r.SlotID][r.OptionID]=parseInt(r.Qty)||1;
+    });
+  }
+  if(data.customItems){
+    data.customItems.forEach(r=>{
+      const sid=r.SlotID;
+      if(!state.customItems[sid])state.customItems[sid]=[];
+      if(!state.customItems[sid].find(i=>i.id===r.ID)){
+        state.customItems[sid].push({id:r.ID,slotId:sid,name:r.Name,desc:r.Desc,
+          price:parseFloat(r.Price)||0,was:r.Was?parseFloat(r.Was):null,
+          retailer:r.Retailer||'OTHER',article:r.Article||'—',loc:r.Loc||'—',
+          url:r.URL||'',img:r.Img||null,note:r.Note||null,populating:r.Populating==='TRUE'});
+      }
+    });
+  }
+  saveLocal();renderAll();
+}
+
+/* ══════ ANTHROPIC URL POPULATE ══════ */
+async function populateFromUrl(url){
+  if(!ANTHROPIC_KEY) throw new Error('no-key');
+  let html='';
+  try{
+    const pr=await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,{signal:AbortSignal.timeout(8000)});
+    const pd=await pr.json();html=pd.contents||'';
+  }catch(e){}
+  const prompt=html.length>100
+    ?`Extract product info from this HTML. Return ONLY valid JSON (no markdown) with keys: name, desc (1-2 lines), price (number), was (number or null), retailer (string), img (main product image URL or null), note (null).\n\nHTML:\n${html.slice(0,40000)}`
+    :`Product URL: ${url}\nReturn ONLY valid JSON: {name, desc, price (number), was (null), retailer, img (null), note (null)}.`;
+  const resp=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-api-key':ANTHROPIC_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,messages:[{role:'user',content:prompt}]})
+  });
+  if(!resp.ok){
+    const e=await resp.json().catch(()=>({}));
+    if(resp.status===529||resp.status===429||e.type==='overloaded_error') throw new Error('usage');
+    throw new Error('api-error');
+  }
+  const data=await resp.json();
+  const text=(data.content||[]).find(b=>b.type==='text')?.text||'';
+  return JSON.parse(text.replace(/```json|```/g,'').trim());
+}
+
+/* ══════ HELPERS ══════ */
+function allSlots(){return sections.flatMap(s=>s.slots)}
+function getQty(sid,oid){return(state.selections[sid]||{})[oid]||0}
+function setQty(sid,oid,qty){
+  if(!state.selections[sid])state.selections[sid]={};
+  if(qty<=0){delete state.selections[sid][oid];if(!Object.keys(state.selections[sid]).length)delete state.selections[sid];}
+  else state.selections[sid][oid]=qty;
+  saveLocal();scheduleSyncSelections();
+}
+function slotTotal(slot){
+  let t=0,c=0;const ss=state.selections[slot.id]||{};
+  [...slot.options,...(state.customItems[slot.id]||[])].forEach(o=>{const q=ss[o.id]||0;if(q>0){t+=o.price*q;c+=q;}});
+  return{total:t,count:c};
+}
+function genId(){return 'custom-'+Math.random().toString(36).slice(2,9)}
+function mono(n){return n.replace(/[^A-ZÄÖÜÅa-zäöüå]/g,'').slice(0,2).toUpperCase()||'??'}
+
+/* ══════ RENDER ══════ */
+function renderCard(opt,slotId,cat){
+  const qty=getQty(slotId,opt.id),sel=qty>0;
+  const metaParts=[];
+  if(opt.article&&opt.article!=='—')metaParts.push('Art. '+opt.article);
+  if(opt.loc&&opt.loc!=='—')metaParts.push(opt.loc);
+  const priceHtml=opt.was
+    ?`<span class="pcard-price sale">£${opt.price}</span><span class="pcard-was">£${opt.was}</span><span class="pcard-sale-tag">SALE</span>`
+    :`<span class="pcard-price">£${opt.price}</span>`;
+  const imgWrap=opt.img?`<div style="overflow:hidden;border-radius:calc(var(--r) - 2px) calc(var(--r) - 2px) 0 0"><img src="${opt.img}" alt="${opt.name}" style="width:100%;height:80px;object-fit:cover;display:block" loading="lazy"></div>`:'';
+  const footLeft = sel
+    ? (opt.retailer ? `<span class="retailer-pill rp-${opt.retailer}">${opt.retailer}</span>` : '')
+    : `<div style="display:flex;align-items:center;gap:6px">
+        ${opt.retailer ? `<span class="retailer-pill rp-${opt.retailer}">${opt.retailer}</span>` : ''}
+        ${opt.url ? `<a class="view-link" href="${opt.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">View ↗</a>` : ''}
+      </div>`;
+  const qtyHtml=sel?`<div class="qty-stepper" onclick="event.stopPropagation()">
+    <button class="qty-btn" onclick="changeQty('${slotId}','${opt.id}',-1)">−</button>
+    <span class="qty-num">${qty}</span>
+    <button class="qty-btn" onclick="changeQty('${slotId}','${opt.id}',1)">+</button>
+  </div>`:'';
+  return `
+  <div class="pcard${sel?' selected':''}" id="card-${opt.id}" onclick="toggleCard('${slotId}','${opt.id}')">
+    ${imgWrap}
+    <div class="pcard-body">
+      <div class="pcard-name">${opt.name}</div>
+      <div class="pcard-desc">${opt.desc||''}</div>
+      <div class="pcard-price-row">${priceHtml}</div>
+      ${metaParts.length?`<div class="pcard-meta">${metaParts.join(' · ')}</div>`:''}
+      ${opt.note&&!opt.populating?`<div class="pcard-note">${opt.note}</div>`:''}
+      ${opt.populating?`<div class="pcard-loading"><div class="spinner"></div><span>Fetching details…</span></div>`:''}
+    </div>
+    <div class="pcard-foot">
+      ${footLeft}
+      ${qtyHtml}
+    </div>
+  </div>`;
+}
+
+function renderAddCustomBtn(slotId){
+  return `<button class="add-custom-trigger" onclick="openCustomForm('${slotId}')">
+    <span class="plus">+</span><span>Add item</span>
+  </button>`;
+}
+
+function renderCustomForm(slotId){
+  return `
+  <div class="custom-form-wrap" id="custom-form-${slotId}">
+    <div class="custom-form-title">Add a custom item</div>
+    <div class="form-group">
+      <div class="form-label">Product URL (optional — auto-fills details)</div>
+      <div class="form-url-row">
+        <input class="form-input" type="url" id="cf-url-${slotId}" placeholder="https://…" style="flex:1">
+        <button class="btn primary" onclick="fetchCustomItem('${slotId}')" id="cf-fetch-${slotId}">Fetch ↗</button>
+      </div>
+      <div id="cf-fetch-status-${slotId}" style="min-height:18px;margin-top:4px"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><div class="form-label">Name</div>
+        <input class="form-input" type="text" id="cf-name-${slotId}" placeholder="Product name">
+      </div>
+      <div class="form-group"><div class="form-label">Price (£)</div>
+        <input class="form-input" type="number" id="cf-price-${slotId}" placeholder="0" style="width:80px">
+      </div>
+    </div>
+    <div class="form-group"><div class="form-label">Description</div>
+      <input class="form-input" type="text" id="cf-desc-${slotId}" placeholder="Brief description">
+    </div>
+    <div class="form-row-3">
+      <div class="form-group"><div class="form-label">Retailer</div>
+        <input class="form-input" type="text" id="cf-retailer-${slotId}" placeholder="IKEA / JL / …">
+      </div>
+      <div class="form-group"><div class="form-label">Article</div>
+        <input class="form-input" type="text" id="cf-article-${slotId}" placeholder="—">
+      </div>
+      <div class="form-group"><div class="form-label">Location</div>
+        <input class="form-input" type="text" id="cf-loc-${slotId}" placeholder="—">
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn ghost" onclick="closeCustomForm('${slotId}')">Cancel</button>
+      <button class="btn primary" onclick="addCustomItem('${slotId}')">Add to list</button>
+    </div>
+  </div>`;
+}
+
+function renderSlot(slot,secId,cat){
+  const col=state.collapsed.slots[slot.id];
+  const{total,count}=slotTotal(slot);
+  const custom=state.customItems[slot.id]||[];
+  const all=[...slot.options,...custom];
+  const n=all.length,sf=openFormSlot===slot.id;
+  const sum=count>0
+    ?`<span class="slot-summary-txt">${count} selected</span><span class="slot-summary-price">£${total.toLocaleString()}</span>`
+    :`<span class="slot-summary-txt">—</span>`;
+  return `
+  <div class="slot${col?' collapsed':''}" id="slot-${slot.id}">
+    <div class="slot-head" onclick="toggleSlotCollapse('${slot.id}')">
+      <div class="slot-head-left">
+        <span class="slot-chevron">▼</span>
+        <span class="slot-label">${slot.label}</span>
+        <span class="slot-n">${n} option${n!==1?'s':''}</span>
+      </div>
+      <div class="slot-head-right" onclick="event.stopPropagation()">${sum}</div>
+    </div>
+    <div class="slot-body">
+      <div class="slot-cards">
+        ${all.map(o=>renderCard(o,slot.id,cat)).join('')}
+        ${sf?renderCustomForm(slot.id):renderAddCustomBtn(slot.id)}
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderSection(sec){
+  const col=state.collapsed.sections[sec.id];
+  let t=0,c=0;
+  sec.slots.forEach(s=>{const{total,count}=slotTotal(s);t+=total;c+=count;});
+  const badge=c>0?`<span class="room-sel-badge">£${t.toLocaleString()}</span>`:'';
+  return `
+  <div class="room-section${col?' collapsed':''}" id="section-${sec.id}">
+    <div class="room-title" onclick="toggleSectionCollapse('${sec.id}')">
+      <div class="room-title-text">
+        <span class="room-title-name">${sec.title}</span>${badge}
+      </div>
+      <div class="room-chevron">▼</div>
+    </div>
+    <div class="room-body">${sec.slots.map(s=>renderSlot(s,sec.id,sec.cat)).join('')}</div>
+  </div>`;
+}
+
+function renderSummary(){
+  const rows=[];
+  sections.forEach(sec=>{
+    sec.slots.forEach(slot=>{
+      const ss=state.selections[slot.id]||{};
+      [...slot.options,...(state.customItems[slot.id]||[])].forEach(opt=>{
+        const qty=ss[opt.id]||0;if(qty>0)rows.push({section:sec.title,opt,qty});
+      });
+    });
+  });
+  if(!rows.length) return `<div class="summary-section"><div class="summary-title">Your basket</div><p class="summary-empty">No items selected yet — click any card above to add it.</p></div>`;
+  const grand=rows.reduce((s,r)=>s+r.opt.price*r.qty,0);
+  const rowsHtml=rows.map(r=>`
+    <tr>
+      <td><div class="summary-room">${r.section}</div></td>
+      <td><div class="summary-item-name">${r.opt.name}${r.qty>1?' ×'+r.qty:''}</div>
+          <div class="summary-item-detail">${r.opt.desc||''}</div></td>
+      <td><span class="retailer-pill rp-${r.opt.retailer||''}" style="font-size:9px">${r.opt.retailer||''}</span></td>
+      <td class="summary-price">£${(r.opt.price*r.qty).toLocaleString()}</td>
+    </tr>`).join('');
+  return `
+  <div class="summary-section">
+    <div class="summary-title">Basket &thinsp;— ${rows.length} line${rows.length!==1?'s':''}</div>
+    <table class="summary-table">
+      <thead><tr><th style="width:110px">Room</th><th>Item</th><th style="width:55px">From</th><th style="width:70px;text-align:right">Total</th></tr></thead>
+      <tbody>${rowsHtml}</tbody>
+      <tfoot><tr class="summary-total"><td colspan="3">Grand total</td><td class="summary-price">£${grand.toLocaleString()}</td></tr></tfoot>
+    </table>
+  </div>`;
+}
+
+function renderAll(){
+  const sy=window.scrollY;
+  document.getElementById('app').innerHTML=sections.map(renderSection).join('');
+  document.getElementById('summary-mount').innerHTML=renderSummary();
+  updateStats();window.scrollTo(0,sy);
+}
+
+function refreshSlot(slotId){
+  const slot=allSlots().find(s=>s.id===slotId);
+  const sec=sections.find(s=>s.slots.some(sl=>sl.id===slotId));
+  const el=document.getElementById('slot-'+slotId);
+  if(!slot||!el)return;
+  const tmp=document.createElement('div');
+  tmp.innerHTML=renderSlot(slot,sec?.id,sec?.cat);
+  el.replaceWith(tmp.firstElementChild);
+  document.getElementById('summary-mount').innerHTML=renderSummary();
+  updateStats();
+}
+
+function updateStats(){
+  let basket=0,items=0,decided=0;const total=allSlots().length;
+  allSlots().forEach(slot=>{const{total:t,count:c}=slotTotal(slot);if(c>0){basket+=t;items+=c;decided++;}});
+  document.getElementById('val-basket').textContent='£'+basket.toLocaleString();
+  document.getElementById('val-items').textContent=items;
+  document.getElementById('val-decided').textContent=decided+'/'+total;
+  const pct=total?Math.round(decided/total*100):0;
+  document.getElementById('prog-bar').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=decided+' of '+total+' slots decided';
+}
+
+/* ══════ INTERACTIONS ══════ */
+function toggleCard(sid,oid){const q=getQty(sid,oid);setQty(sid,oid,q>0?0:1);refreshSlot(sid);}
+function changeQty(sid,oid,d){setQty(sid,oid,Math.max(0,getQty(sid,oid)+d));refreshSlot(sid);}
+function toggleSectionCollapse(id){state.collapsed.sections[id]=!state.collapsed.sections[id];saveLocal();document.getElementById('section-'+id)?.classList.toggle('collapsed');}
+function toggleSlotCollapse(id){state.collapsed.slots[id]=!state.collapsed.slots[id];saveLocal();document.getElementById('slot-'+id)?.classList.toggle('collapsed');}
+
+/* ══════ CUSTOM ITEM FORM ══════ */
+function openCustomForm(sid){
+  openFormSlot=sid;refreshSlot(sid);
+  setTimeout(()=>document.getElementById('custom-form-'+sid)?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'end'}),50);
+}
+function closeCustomForm(sid){openFormSlot=null;refreshSlot(sid);}
+
+async function fetchCustomItem(sid){
+  const urlEl=document.getElementById('cf-url-'+sid);
+  const statusEl=document.getElementById('cf-fetch-status-'+sid);
+  const fetchBtn=document.getElementById('cf-fetch-'+sid);
+  const url=urlEl?.value?.trim();
+  if(!url){toast('Paste a product URL first');return;}
+  if(!ANTHROPIC_KEY){statusEl.innerHTML=`<span style="color:var(--warn);font-size:11px">No Anthropic API key — fill in manually.</span>`;return;}
+  fetchBtn.disabled=true;fetchBtn.textContent='…';
+  statusEl.innerHTML=`<div class="fetch-spinner"><div class="spinner"></div><span>Fetching product details…</span></div>`;
+  try{
+    const info=await populateFromUrl(url);
+    const set=(id,val)=>{const el=document.getElementById(id);if(el&&val!=null)el.value=val;};
+    set('cf-name-'+sid,info.name);set('cf-desc-'+sid,info.desc);
+    set('cf-price-'+sid,info.price);set('cf-retailer-'+sid,info.retailer);
+    statusEl.innerHTML=`<span style="color:var(--sage);font-size:11px">Details loaded — review and add.</span>`;
+    urlEl.dataset.img=info.img||'';
+  }catch(e){
+    const msgs={usage:'Out of Claude usage — fill in manually, try again later.','no-key':'Anthropic API key not configured.','api-error':'Could not fetch details — check the URL or fill in manually.'};
+    statusEl.innerHTML=`<span style="color:var(--warn);font-size:11px">${msgs[e.message]||msgs['api-error']}</span>`;
+  }
+  fetchBtn.disabled=false;fetchBtn.textContent='Fetch ↗';
+}
+
+function addCustomItem(sid){
+  const g=id=>document.getElementById(id)?.value?.trim()||'';
+  const name=g('cf-name-'+sid);
+  if(!name){toast('Please enter a product name');return;}
+  const urlEl=document.getElementById('cf-url-'+sid);
+  const item={id:genId(),slotId:sid,name,desc:g('cf-desc-'+sid),
+    price:parseFloat(g('cf-price-'+sid))||0,was:null,
+    retailer:g('cf-retailer-'+sid)||'OTHER',
+    article:g('cf-article-'+sid)||'—',loc:g('cf-loc-'+sid)||'—',
+    url:urlEl?.value?.trim()||'',img:urlEl?.dataset?.img||null,
+    note:null,populating:false};
+  if(!state.customItems[sid])state.customItems[sid]=[];
+  state.customItems[sid].push(item);saveLocal();
+  const sec=sections.find(s=>s.slots.some(sl=>sl.id===sid));
+  sheetPost({action:'addCustomItem',item:{...item,sectionTitle:sec?.title||''}});
+  openFormSlot=null;refreshSlot(sid);
+  toast('Added to '+(allSlots().find(s=>s.id===sid)?.label||sid));
+}
+
+/* ══════ SHARE & RESET ══════ */
+function shareURL(){
+  const pairs=[];
+  Object.entries(state.selections).forEach(([sid,opts])=>{
+    Object.entries(opts).forEach(([oid,qty])=>{if(qty>0)pairs.push(encodeURIComponent(sid+':'+oid)+'='+qty);});
+  });
+  const url=location.href.split('#')[0]+(pairs.length?'#'+pairs.join('&'):'');
+  // Try clipboard; fall back to prompt so the user can manually copy
+  if(navigator.clipboard&&typeof navigator.clipboard.writeText==='function'){
+    navigator.clipboard.writeText(url)
+      .then(()=>toast('Link copied to clipboard!'))
+      .catch(()=>{ window.prompt('Copy this link (Ctrl+C / Cmd+C):',url); });
+  } else {
+    window.prompt('Copy this link (Ctrl+C / Cmd+C):',url);
+  }
+}
+function loadFromHash(){
+  const hash=location.hash.slice(1);if(!hash)return;
+  hash.split('&').forEach(pair=>{
+    const[rk,rv]=pair.split('=');if(!rk||!rv)return;
+    const key=decodeURIComponent(rk),qty=parseInt(rv)||1;
+    const[sid,oid]=key.split(':');
+    if(sid&&oid){if(!state.selections[sid])state.selections[sid]={};state.selections[sid][oid]=qty;}
+  });
+}
+function resetAll(){
+  if(!confirm('Clear all selections? Custom items will remain.'))return;
+  Object.keys(state.selections).forEach(k=>delete state.selections[k]);
+  saveLocal();scheduleSyncSelections();renderAll();
+  toast('Selections cleared');
+}
+function toast(msg,dur=2400){
+  const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');
+  clearTimeout(toast._t);toast._t=setTimeout(()=>el.classList.remove('show'),dur);
+}
+
+/* ══════ INIT ══════ */
+loadLocalState();
+loadFromHash();
+renderAll();
+initFromSheet();
+</script>
+</body>
+</html>
